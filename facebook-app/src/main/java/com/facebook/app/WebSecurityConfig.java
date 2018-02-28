@@ -8,18 +8,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	@Qualifier("userDetailsService")
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
 	@Qualifier("tokenRepository")
-	TokenRepository tokenRepository;
+	private TokenRepository persistentTokenRepository;
 	
 	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,10 +42,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         loginProcessingUrl("/login").
         usernameParameter("app_username").
         passwordParameter("app_password")
-        .and()
-	    .rememberMe().key("testKeyDRMRS").rememberMeServices(rememberMeServices());
+        .and().rememberMe().rememberMeParameter("remember-me")
+        .tokenRepository(persistentTokenRepository)
+        .userDetailsService(userDetailsService)
+	    .and()
+	    .csrf().disable();
+	    //.rememberMe().rememberMeServices(rememberMeServices());
 	  }
-	  @Bean
+
+/*	  @Bean
 	    public AbstractRememberMeServices rememberMeServices() {
 	        PersistentTokenBasedRememberMeServices rememberMeServices =
 	                new PersistentTokenBasedRememberMeServices("testKeyDRMRS", userDetailsService,tokenRepository);
@@ -54,5 +58,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        rememberMeServices.setCookieName("remember-me");
 	        rememberMeServices.setTokenValiditySeconds(1209600);
 	        return rememberMeServices;
-	    }
+	    }*/
 	}
