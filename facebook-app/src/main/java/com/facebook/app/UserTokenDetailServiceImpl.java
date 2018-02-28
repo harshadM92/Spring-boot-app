@@ -17,12 +17,14 @@ public class UserTokenDetailServiceImpl implements UserDetailsService{
 	@Autowired
 	private UserDetailRepository loginUserDetailRepository;
 	
+	
+	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		UserDetail userDetail=null;
 		
-		loginUserDetailRepository=ApplicationContextProvider.getApplicationContext().getBean(UserDetailRepository.class);
+		//loginUserDetailRepository=ApplicationContextProvider.getApplicationContext().getBean(UserDetailRepository.class);
 		
 		userDetail=loginUserDetailRepository.findLoginUserDetailByUserName(userName);
 		

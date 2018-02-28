@@ -9,9 +9,11 @@ import javax.persistence.Query;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.stereotype.Service;
 
 import com.facebook.DAO.UserToken;
 
+@Service("tokenRepository")
 public class TokenRepository implements PersistentTokenRepository {
 
 	private final String TRANSACTIONMANAGER = "transactionManager";
