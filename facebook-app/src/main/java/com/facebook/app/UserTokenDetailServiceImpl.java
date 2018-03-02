@@ -14,6 +14,7 @@ import com.facebook.repository.UserDetailRepository;
 @Service("userDetailsService")
 public class UserTokenDetailServiceImpl implements UserDetailsService{
 
+	@Autowired
 	private UserDetailRepository loginUserDetailRepository;
 	
 	@Override

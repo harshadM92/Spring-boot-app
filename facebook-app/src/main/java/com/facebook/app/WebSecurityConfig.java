@@ -25,6 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("tokenRepositoryService")
 	private PersistentTokenRepository persistentTokenRepository;
 	
+	@Autowired
+	private SpringAuthenticationSuccessHandler springAuthenticationSuccessHandler;
+	
+	@Autowired
+	private SpringAuthenticationFailureHandler springAuthenticationFailureHandler;
+	
 	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		  auth.authenticationProvider(authenticationProvider());
@@ -39,22 +45,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	   
 	  @Override
 	  protected void configure(HttpSecurity http) throws Exception {
-	    http.authorizeRequests().antMatchers("/FirstController/hello/**").permitAll().anyRequest().authenticated()
+	    http.authorizeRequests().antMatchers("/login**").permitAll()
 	    .and()
-	    .formLogin().
-	    loginPage("/index.jsp")
-        .loginProcessingUrl("/login")
-        .usernameParameter("userName")
-        .passwordParameter("password")
-        .permitAll()
-        .and().rememberMe().rememberMeParameter("remember-me")
-        .tokenRepository(persistentTokenRepository)
-        .userDetailsService(userDetailsService)
+	    .formLogin().loginPage("/index.jsp")
+        .loginProcessingUrl("/login").permitAll()
+        .usernameParameter(FacebookConstants.SPRING_USERNAME)
+        .passwordParameter(FacebookConstants.SPRING_PASSOWRD)
+        .successHandler(springAuthenticationSuccessHandler)
+        .failureHandler(springAuthenticationFailureHandler)
+        .and()
+        .authorizeRequests()
+	    .anyRequest().authenticated()
         .and()
         .rememberMe().rememberMeServices(rememberMeServices())
 	    .and()
 	    .csrf().disable();
-	    
 	  }
 
 	  @Bean
