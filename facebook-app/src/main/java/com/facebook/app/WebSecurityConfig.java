@@ -4,8 +4,6 @@ package com.facebook.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -34,8 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 	
-	@Autowired
-	private CustomAccessDeniedHandler customAccessDeniedHandler;
+/*	@Autowired
+	private CustomAccessDeniedHandler customAccessDeniedHandler;*/
 	
 /*	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
