@@ -54,7 +54,7 @@ public class TokenRepositoryService implements PersistentTokenRepository {
 		final JpaTransactionManager jpaTransactionManager=(JpaTransactionManager)ApplicationContextProvider.getApplicationContext().getBean(TRANSACTIONMANAGER);
 		final EntityManager entityManager=jpaTransactionManager.getEntityManagerFactory().createEntityManager();
 		
-		final Query query=entityManager.createQuery("FROM SpringToken springToken where springToken.userName=:userName");
+		final Query query=entityManager.createQuery("FROM UserToken ut where ut.userName=:userName");
 		query.setParameter("userName", userName);
 		
 		final List list=query.getResultList();

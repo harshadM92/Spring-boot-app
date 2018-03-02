@@ -25,7 +25,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("tokenRepositoryService")
 	private PersistentTokenRepository persistentTokenRepository;
 	
-	  @Override
+	@Autowired
+	private SpringAuthenticationSuccessHandler springAuthenticationSuccessHandler;
+	
+	@Autowired
+	private SpringAuthenticationFailureHandler springAuthenticationFailureHandler;
+	
+	@Autowired
+	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
+	
+	@Autowired
+	private CustomAccessDeniedHandler customAccessDeniedHandler;
+	
+/*	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		  auth.authenticationProvider(authenticationProvider());
 	  }
@@ -35,26 +47,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        = new DaoAuthenticationProvider();
 	      authProvider.setUserDetailsService(userDetailsService);
 	      return authProvider;
-	  }
+	  }*/
 	   
 	  @Override
 	  protected void configure(HttpSecurity http) throws Exception {
-	    http.authorizeRequests().antMatchers("/FirstController/hello/**").permitAll().anyRequest().authenticated()
+	    http.authorizeRequests().antMatchers("/login**").permitAll()
+	    .antMatchers("/FirstController/403").permitAll()
 	    .and()
-	    .formLogin().
-	    loginPage("/index.jsp")
-        .loginProcessingUrl("/login")
-        .usernameParameter("userName")
-        .passwordParameter("password")
-        .permitAll()
-        .and().rememberMe().rememberMeParameter("remember-me")
-        .tokenRepository(persistentTokenRepository)
-        .userDetailsService(userDetailsService)
+	    .formLogin().loginPage("/FirstController/403")
+        .loginProcessingUrl("/login").permitAll()
+        .usernameParameter(FacebookConstants.SPRING_USERNAME)
+        .passwordParameter(FacebookConstants.SPRING_PASSOWRD)
+        .successHandler(springAuthenticationSuccessHandler)
+        .failureHandler(springAuthenticationFailureHandler)
+        .and()
+        .logout().logoutSuccessHandler(customLogoutSuccessHandler)
+//        .and()
+//        .exceptionHandling().accessDeniedPage("/FirstController/403")
+        .and()
+        .authorizeRequests()
+	    .anyRequest().authenticated()
         .and()
         .rememberMe().rememberMeServices(rememberMeServices())
 	    .and()
 	    .csrf().disable();
-	    
 	  }
 
 	  @Bean
