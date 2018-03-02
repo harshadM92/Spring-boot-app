@@ -31,6 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SpringAuthenticationFailureHandler springAuthenticationFailureHandler;
 	
+	@Autowired
+	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
+	
 	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		  auth.authenticationProvider(authenticationProvider());
@@ -53,6 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .passwordParameter(FacebookConstants.SPRING_PASSOWRD)
         .successHandler(springAuthenticationSuccessHandler)
         .failureHandler(springAuthenticationFailureHandler)
+        .and()
+        .logout().logoutSuccessHandler(customLogoutSuccessHandler)
         .and()
         .authorizeRequests()
 	    .anyRequest().authenticated()
