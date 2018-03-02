@@ -34,7 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 	
-	  @Override
+	@Autowired
+	private CustomAccessDeniedHandler customAccessDeniedHandler;
+	
+/*	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		  auth.authenticationProvider(authenticationProvider());
 	  }
@@ -44,13 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        = new DaoAuthenticationProvider();
 	      authProvider.setUserDetailsService(userDetailsService);
 	      return authProvider;
-	  }
+	  }*/
 	   
 	  @Override
 	  protected void configure(HttpSecurity http) throws Exception {
 	    http.authorizeRequests().antMatchers("/login**").permitAll()
+	    .antMatchers("/FirstController/403").permitAll()
 	    .and()
-	    .formLogin().loginPage("/index.jsp")
+	    .formLogin().loginPage("/FirstController/403")
         .loginProcessingUrl("/login").permitAll()
         .usernameParameter(FacebookConstants.SPRING_USERNAME)
         .passwordParameter(FacebookConstants.SPRING_PASSOWRD)
@@ -58,6 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .failureHandler(springAuthenticationFailureHandler)
         .and()
         .logout().logoutSuccessHandler(customLogoutSuccessHandler)
+//        .and()
+//        .exceptionHandling().accessDeniedPage("/FirstController/403")
         .and()
         .authorizeRequests()
 	    .anyRequest().authenticated()
