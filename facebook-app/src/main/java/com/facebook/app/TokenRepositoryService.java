@@ -10,15 +10,15 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+//import org.springframework.transaction.annotation.Transactional;
 
 import com.facebook.DAO.UserToken;
 
-//@Repository("tokenRepository")
-@Service("tokenRepository")
-public class TokenRepository implements PersistentTokenRepository {
+@Repository("tokenRepositoryService")
+public class TokenRepositoryService implements PersistentTokenRepository {
 
 	private final String TRANSACTIONMANAGER = "transactionManager";
+	
 	
 	@Override
 	public void createNewToken(PersistentRememberMeToken persistentRememberMeToken) {

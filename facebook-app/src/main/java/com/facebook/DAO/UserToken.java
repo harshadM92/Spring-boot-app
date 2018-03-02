@@ -44,7 +44,7 @@ public class UserToken {
 		this.tokenValue = persistentRememberMeToken.getTokenValue();
 		this.tokenLastUsed = persistentRememberMeToken.getDate();
 	}
-
+	public UserToken(){}
 	/**
 	 * @return the series
 	 */

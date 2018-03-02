@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.facebook.**"})
 @EnableConfigurationProperties
 @EntityScan(basePackages = {"com.facebook.DAO"})
 @EnableJpaRepositories(basePackages = {"com.facebook.repository"})
