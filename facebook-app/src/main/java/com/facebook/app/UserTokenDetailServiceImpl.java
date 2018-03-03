@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.facebook.DAO.UserDetail;
+import com.facebook.common.ApplicationContextProvider;
 import com.facebook.repository.UserDetailRepository;
 
 @Service("userDetailsService")

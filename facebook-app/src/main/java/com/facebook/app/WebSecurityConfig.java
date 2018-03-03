@@ -60,8 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .failureHandler(springAuthenticationFailureHandler)
         .and()
         .logout().logoutSuccessHandler(customLogoutSuccessHandler)
-//        .and()
-//        .exceptionHandling().accessDeniedPage("/FirstController/403")
         .and()
         .authorizeRequests()
 	    .anyRequest().authenticated()

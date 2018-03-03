@@ -24,6 +24,11 @@ public class FirstController {
 		return firstService.getMyString(id);
 	}
 	
+	@RequestMapping("/bye")
+	public String getByeText() {
+		return "bye";
+	}
+	
 	// for 403 access denied page
 	@RequestMapping(value = "/403")
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)

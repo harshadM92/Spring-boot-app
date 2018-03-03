@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.facebook.DAO.UserDetail;
+import com.facebook.common.ApplicationContextProvider;
 import com.facebook.repository.UserDetailRepository;
 
 @Component

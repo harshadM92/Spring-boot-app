@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Transactional;
 
 import com.facebook.DAO.UserToken;
+import com.facebook.common.ApplicationContextProvider;
 
 @Repository("tokenRepositoryService")
 public class TokenRepositoryService implements PersistentTokenRepository {
