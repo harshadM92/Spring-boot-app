@@ -4,8 +4,6 @@ package com.facebook.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,6 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import com.facebook.common.CustomLogoutSuccessHandler;
+import com.facebook.common.FacebookConstants;
+import com.facebook.common.SpringAuthenticationFailureHandler;
+import com.facebook.common.SpringAuthenticationSuccessHandler;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,9 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
-	
-	@Autowired
-	private CustomAccessDeniedHandler customAccessDeniedHandler;
 	
 /*	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -62,8 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .failureHandler(springAuthenticationFailureHandler)
         .and()
         .logout().logoutSuccessHandler(customLogoutSuccessHandler)
-//        .and()
-//        .exceptionHandling().accessDeniedPage("/FirstController/403")
         .and()
         .authorizeRequests()
 	    .anyRequest().authenticated()

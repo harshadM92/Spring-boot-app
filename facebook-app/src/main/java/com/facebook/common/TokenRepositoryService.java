@@ -1,4 +1,4 @@
-package com.facebook.app;
+package com.facebook.common;
 
 import java.util.Date;
 import java.util.List;
@@ -84,7 +84,4 @@ public class TokenRepositoryService implements PersistentTokenRepository {
 		entityManager.merge(existingToken);
 		entityManager.getTransaction().commit();
 	}
-
-	
-	
 }

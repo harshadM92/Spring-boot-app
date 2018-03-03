@@ -11,18 +11,20 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.facebook.common.ApplicationContextProvider;
+
 @SpringBootApplication(scanBasePackages={"com.facebook.**"})
 @EnableConfigurationProperties
 @EntityScan(basePackages = {"com.facebook.DAO"})
 @EnableJpaRepositories(basePackages = {"com.facebook.repository"})
 public class FacebookAppApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FacebookAppApplication.class, args);
 	}
 	
 	 @Bean
-	    public ApplicationContextProvider applicationContextProvider() {
+	  public ApplicationContextProvider applicationContextProvider() {
 	        return new ApplicationContextProvider();
 	  }
 }
