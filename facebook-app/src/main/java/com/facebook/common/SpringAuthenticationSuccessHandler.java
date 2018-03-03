@@ -44,11 +44,18 @@ public class SpringAuthenticationSuccessHandler implements AuthenticationSuccess
 			response.setHeader("userId", encryptedUserDetailId);
 		}
 		response.setContentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE);
-		response.getWriter().write("{\"status\":\"Success\"}");		
+		response.getWriter().write("{\"status\":\"success\"}");		
 		response.setHeader("X-Powered-By", "");
 		response.setHeader("X-Frame-Options", "SAMEORIGIN");
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setHeader("Access-Control-Allow-Origin", "*");
+/*		response.setHeader("Access-Control-Allow-Methods", "*");
+		
+		response.setHeader("Access-Control-Allow-Headers", "*");
+		response.setHeader("Access-Control-Allow-Credentials", "false");
+		
+		response.setHeader("Access-Control-Max-Age", "3600");*/
 		response.setDateHeader("Expires", 0); // Proxies.
 		
 	}

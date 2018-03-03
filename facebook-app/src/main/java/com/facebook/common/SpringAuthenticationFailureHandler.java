@@ -19,13 +19,14 @@ public class SpringAuthenticationFailureHandler implements AuthenticationFailure
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
-		String jsonStringUser = "{\"status\":\"Error\"}";
+		String jsonStringUser = "{\"status\":\"error\"}";
 		response.setContentType("application/json");
 		response.getWriter().write(jsonStringUser);
 		response.setHeader("X-Powered-By", "");
 		response.setHeader("X-Frame-Options", "SAMEORIGIN");
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP  1.1.
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setDateHeader("Expires", 0); // Proxies.
 	}
 
