@@ -19,7 +19,7 @@ import com.facebook.repository.UserDetailRepository;
 public class SpringAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Autowired
-	private UserDetailRepository loginUserDetailRepository;
+	private UserDetailRepository userDetailRepository;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request,
@@ -27,18 +27,15 @@ public class SpringAuthenticationSuccessHandler implements AuthenticationSuccess
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		
-		loginUserDetailRepository=ApplicationContextProvider.getApplicationContext().getBean(UserDetailRepository.class);
+		userDetailRepository=ApplicationContextProvider.getApplicationContext().getBean(UserDetailRepository.class);
 		
 		String userLogin=request.getParameter(FacebookConstants.SPRING_USERNAME);
 		
-		UserDetail loginUserDetail=loginUserDetailRepository.findLoginUserDetailByUserName(userLogin);
+		UserDetail userDetail=userDetailRepository.findUserDetailByUserName(userLogin);
 		
-		/*if(loginUserDetail!=null){
-			String encryptedUserDetailId=DesEncrypter.encrypt(LoginAppConstants.ENCRYPTION_KEY,LoginAppConstants.ENCRYPTION_INIT_VECTOR, loginUserDetail.getUserId());
-			response.setHeader(LoginAppConstants.USER_DETAIL_ID, encryptedUserDetailId);
-		}*/
-		if(loginUserDetail!=null){
-			response.setHeader("userId", loginUserDetail.getUserDetailId());
+		if(userDetail!=null){
+			String encryptedUserDetailId=DesEncrypter.encrypt(FacebookConstants.ENCRYPTION_KEY,FacebookConstants.ENCRYPTION_INIT_VECTOR, userDetail.getUserDetailId());
+			response.setHeader("userId", encryptedUserDetailId);
 		}
 		response.setContentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE);
 		response.getWriter().write("{\"status\":\"Success\"}");		

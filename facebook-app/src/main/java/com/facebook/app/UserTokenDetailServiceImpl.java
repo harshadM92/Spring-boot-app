@@ -22,7 +22,7 @@ public class UserTokenDetailServiceImpl implements UserDetailsService{
 		// TODO Auto-generated method stub
 		UserDetail userDetail=null;
 		loginUserDetailRepository=ApplicationContextProvider.getApplicationContext().getBean(UserDetailRepository.class);
-		userDetail=loginUserDetailRepository.findLoginUserDetailByUserName(userName);
+		userDetail=loginUserDetailRepository.findUserDetailByUserName(userName);
 		if(userDetail ==null){
 			return null;
 		}

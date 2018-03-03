@@ -11,6 +11,6 @@ import com.facebook.DAO.UserDetail;
 public interface UserDetailRepository extends JpaRepository<UserDetail,String> {
 
 	@Query("SELECT ud from UserDetail ud where userName=:userName")
-	public UserDetail findLoginUserDetailByUserName(@Param("userName") String userName);
+	public UserDetail findUserDetailByUserName(@Param("userName") String userName);
 	
 }
