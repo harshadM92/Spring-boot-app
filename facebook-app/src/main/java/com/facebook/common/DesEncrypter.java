@@ -5,9 +5,12 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
 
 public class DesEncrypter {
-	  
+	
+	private static Logger logger = Logger.getLogger(DesEncrypter.class);
+	
 	  public static String encrypt(String key, String initVector, String value) {
 	        try {
 	            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
@@ -17,7 +20,8 @@ public class DesEncrypter {
 	            cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
 
 	            byte[] encrypted = cipher.doFinal(value.getBytes());
-	            System.out.println("encrypted string: "
+	            
+	            logger.info("encrypted string: "
 	                    + Base64.encodeBase64String(encrypted));
 
 	            return Base64.encodeBase64String(encrypted);

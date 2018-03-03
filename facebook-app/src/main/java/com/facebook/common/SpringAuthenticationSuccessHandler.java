@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,8 @@ import com.facebook.repository.UserDetailRepository;
 @Component
 public class SpringAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
+	private static Logger logger=Logger.getLogger(SpringAuthenticationSuccessHandler.class);
+	
 	@Autowired
 	private UserDetailRepository userDetailRepository;
 	
@@ -26,6 +30,8 @@ public class SpringAuthenticationSuccessHandler implements AuthenticationSuccess
 			HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
+		
+		logger.info("onAuthenticationSuccess : started");
 		
 		userDetailRepository=ApplicationContextProvider.getApplicationContext().getBean(UserDetailRepository.class);
 		
