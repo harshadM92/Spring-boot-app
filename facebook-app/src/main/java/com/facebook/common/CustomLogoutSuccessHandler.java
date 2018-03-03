@@ -1,5 +1,4 @@
-package com.facebook.app;
-
+package com.facebook.common;
 import java.io.IOException;
 
 import javax.servlet.ServletException;

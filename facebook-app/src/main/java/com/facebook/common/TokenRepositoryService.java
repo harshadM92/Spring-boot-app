@@ -1,4 +1,4 @@
-package com.facebook.app;
+package com.facebook.common;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Transactional;
 
 import com.facebook.DAO.UserToken;
-import com.facebook.common.ApplicationContextProvider;
 
 @Repository("tokenRepositoryService")
 public class TokenRepositoryService implements PersistentTokenRepository {
@@ -85,7 +84,4 @@ public class TokenRepositoryService implements PersistentTokenRepository {
 		entityManager.merge(existingToken);
 		entityManager.getTransaction().commit();
 	}
-
-	
-	
 }

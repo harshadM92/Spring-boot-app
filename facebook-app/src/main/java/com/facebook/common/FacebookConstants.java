@@ -1,4 +1,4 @@
-package com.facebook.app;
+package com.facebook.common;
 
 public class FacebookConstants {
 

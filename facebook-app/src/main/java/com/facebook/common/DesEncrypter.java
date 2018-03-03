@@ -1,4 +1,4 @@
-package com.facebook.app;
+package com.facebook.common;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -45,5 +45,4 @@ public class DesEncrypter {
 
 	        return null;
 	    }
-	}
-	  
+}

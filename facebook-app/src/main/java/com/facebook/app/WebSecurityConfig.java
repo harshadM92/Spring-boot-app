@@ -12,6 +12,11 @@ import org.springframework.security.web.authentication.rememberme.AbstractRememb
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.facebook.common.CustomLogoutSuccessHandler;
+import com.facebook.common.FacebookConstants;
+import com.facebook.common.SpringAuthenticationFailureHandler;
+import com.facebook.common.SpringAuthenticationSuccessHandler;
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,9 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
-	
-/*	@Autowired
-	private CustomAccessDeniedHandler customAccessDeniedHandler;*/
 	
 /*	  @Override
 	  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
